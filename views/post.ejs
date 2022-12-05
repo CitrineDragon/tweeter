@@ -32,6 +32,26 @@
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/feed">Return to Feed</a>
     </div>
+    <!-- Adding Comments -->
+    <!-- Show Comments -->
+
+    <!-- Create Comment -->
+    <div class="mt-5">
+      <h2>Add a Comment</h2>
+      <form
+        action="/post/createComment"
+        enctype="multipart/form-data"
+        method="POST"
+      >
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comment</label>
+          <textarea class="form-control" id="comment" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" value="Upload">
+          Submit
+        </button>
+      </form>
+    </div>
   </div>
 </div>
 

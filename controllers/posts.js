@@ -1,5 +1,6 @@
 const cloudinary = require('../middleware/cloudinary');
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -35,6 +36,18 @@ module.exports = {
       console.log(err);
     }
   },
+  getComment: async (req, res) => {
+    try {
+      //id parameter comes from the post routes
+      //router.get("/:id", ensureAuth, postsController.getPost);
+      //http://localhost:2121/post/631a7f59a3e56acfc7da286f
+      //id === 631a7f59a3e56acfc7da286f
+      const comment = await Comment.findById(req.params.id);
+      res.render('post.ejs', { comment: comment, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   createPost: async (req, res) => {
     try {
       // Upload image to cloudinary
@@ -51,6 +64,24 @@ module.exports = {
       });
       console.log('Post has been added!');
       res.redirect('/profile');
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  createComment: async (req, res) => {
+    try {
+      // Upload image to cloudinary
+      // const result = await cloudinary.uploader.upload(req.file.path);
+
+      //media is stored on cloudainary - the above request responds with url to media and the media id that you will need when deleting content
+      await Comment.create({
+        comment: req.body.comment,
+        postID: req.params.id,
+        user: req.user.id,
+      });
+      console.log('Comment has been added!');
+      console.log(test);
+      res.redirect('/feed');
     } catch (err) {
       console.log(err);
     }
