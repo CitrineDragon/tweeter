@@ -42,8 +42,8 @@ module.exports = {
       //router.get("/:id", ensureAuth, postsController.getPost);
       //http://localhost:2121/post/631a7f59a3e56acfc7da286f
       //id === 631a7f59a3e56acfc7da286f
-      const comment = await Comment.findById(req.params.id);
-      res.render('post.ejs', { comment: comment, user: req.user });
+      const comments = await Comment.find().sort({ createdAt: 'desc' }).lean();
+      res.render('post.ejs', { comments: comments, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -80,7 +80,6 @@ module.exports = {
         user: req.user.id,
       });
       console.log('Comment has been added!');
-      console.log(test);
       res.redirect('/feed');
     } catch (err) {
       console.log(err);

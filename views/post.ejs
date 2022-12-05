@@ -3,7 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
+      <img class="img-fluid" src="<%= post.image %>" />
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -34,13 +34,27 @@
     </div>
     <!-- Adding Comments -->
     <!-- Show Comments -->
-
+    <!-- prettier-ignore -->
+    <div class="container">
+      <div class="row justify-content-center mt-5">
+        <ul class="row list-unstyled">
+          <% for (let i = 0; i < comments.length; i++) { %> 
+            <% if (comments[i].postID === post.id) { %>
+              <li class="col-6 justify-content-between mt-5">
+                <p><%= comments[i].user %></p>
+                <p><%= comments[i].comment %></p>
+              </li>
+            <% } %> 
+          <% } %>
+        </ul>
+      </div>
+    </div>
     <!-- Create Comment -->
     <div class="mt-5">
       <h2>Add a Comment</h2>
       <form
-        action="/post/createComment"
-        enctype="multipart/form-data"
+        action="/post/createComment/<%= post.id %>"
+        enctype="application/x-www-form-urlencoded"
         method="POST"
       >
         <div class="mb-3">
