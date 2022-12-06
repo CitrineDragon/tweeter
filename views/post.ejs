@@ -42,7 +42,8 @@
           <% for (let i = 0; i < comments.length; i++) { %> 
             <% if (comments[i].postID === post.id) { %>
               <li class="col-6 justify-content-between mt-5">
-                <p><%= comments[i].user %></p>
+                <p> <%= comments[i].user %>
+                </p>
                 <p><%= comments[i].comment %></p>
               </li>
             <% } %> 
